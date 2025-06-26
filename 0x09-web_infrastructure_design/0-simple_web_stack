@@ -1,18 +1,1 @@
 https://imgur.com/a/f8kZOr3
-
--Lets say a client wants to access our server with domain name www.foobar.com 
-1. The client asks DNS server for the ip address of www.foobar.com , the dns responds with 8.8.8.8 ip address then the client requests for web page resources 
-2. The network will pass through firewall then reaches the webserver 
-3. he web server will respond to appropriate web resources
-
--A server is physical computer or VM machine that helps us host our web server , applicaion server , daabase server and so on 
--A domain name prevens us to memorize the ip address of servers by allowing us to use natural language
-- www.foobar.com is a subdomain name while foobar.com is the root domain name
--The web server is a software that responds to HTTP requests with static content like HTML, Css and Javascript
-- The application server responds to business logic or dnamic conen
-- he daabase helps us sore information in a logical way that makes it easier for CRUD operaions
-- The server is using HTTP protocol o communicaet with the client
-- In this infrastructure there are some issues like
- 1. SPOF(single point of failure): which means if one part or single par of the system malfunctions it could bring down the whole system for instance if the web server failed, users could not access the server.
- 2.High Downtime : meaning if we want to push our updates we need to shutdown our server push our code and turn it back again this causes high revenue loss,and its difficult to test.
- 3.Less scalable: if there is high level of incoming traffic we can't scale or grow the system based on needed traffic 

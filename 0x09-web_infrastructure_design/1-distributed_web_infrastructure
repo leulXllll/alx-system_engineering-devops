@@ -1,18 +1,2 @@
-Image link: https://imgur.com/a/z91obJY
+https://imgur.com/a/z91obJY
 
-- In this improvements I have added additional 2 web servers by scalling it horizontally , I have also added Load balancer to distribute the networks and single database 
--The load balancer should be configured with round robin algorithm which works by sequentially aligning the requests for each web server after the third one it will direct traffic to the first server 
-
--Active-Active: means each web servers are responding o requests
--Active-Passive: means here are web servers sitting there idle and if the active servers fail this servers will detect the failure and be activated .
-
--The Load balancer enables an Active-Active which means each server respondes to requests and there is no idle web-server waiting .
-
--Primary-Replica (or Master-Slave) database cluster is a common architecture for data
-replication. It involves a single database instance designated as the "Primary" (or "Master") and one or more database instances designated as "Replicas" (or "Slaves")
-
-- Issues
-1. Security: There are no firewalls protecting the websservers 
-- they are using HTTP protocol which means it is not encrypted leads to man in the middle attack 
-2. No monitoring tools: there are no monitoring tools which means we can't measure our performance , if our web server is properly working
-3. SPOF: In case of cyber attack the whole system will fail because lack of security 

@@ -1,0 +1,41 @@
+#
+# rules.before
+#
+# Rules that are added to the builtin chains in the 'mangle' table.
+#
+*mangle                                   <-- Active table definition
+:PREROUTING ACCEPT [0:0]                  <-- Active chain definition
+:INPUT ACCEPT [0:0]                       <-- Active chain definition
+:FORWARD ACCEPT [0:0]                     <-- Active chain definition
+:OUTPUT ACCEPT [0:0]                      <-- Active chain definition
+:POSTROUTING ACCEPT [0:0]                 <-- Active chain definition
+# Don't delete the 'COMMIT' line or these tables will be incorrect
+COMMIT                                    <-- Active command
+
+#
+# rules.before
+#
+# Rules that are added to the builtin chains in the 'nat' table.
+#
+*nat                                      <-- Active table definition
+:PREROUTING ACCEPT [0:0]                  <-- Active chain definition
+:POSTROUTING ACCEPT [0:0]                 <-- Active chain definition
+
+# ALX Port Forwarding Rule: Redirect HTTP traffic from port 8080 to port 80 <-- Comment
+-A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80  <-- **THIS IS YOUR ACTIVE RULE**
+
+# Don't delete the 'COMMIT' line or these tables will be incorrect
+COMMIT                                    <-- Active command
+
+#
+# rules.before
+#
+# Rules that are added to the builtin chains in the 'filter' table.
+#
+*filter                                   <-- Active table definition
+#
+# ufw-before-input
+#
+-A ufw-before-input -p icmp --icmp-type destination-unreachable -j ACCEPT  <-- Active rule
+-A ufw-before-input -p icmp --icmp-type source-quench -j ACCEPT           <-- Active rule
+# ... (many more active rules follow in the filter table) ...

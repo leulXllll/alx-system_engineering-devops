@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# This script audits the subdomains of a given domain.
+
+# Function to query and display information about a specific subdomain
+query_subdomain() {
+    local domain="$1"
+    local subdomain="$2"
+    
+    # Perform the DNS lookup and parse the output
+    local result
+    result=$(dig "${subdomain}.${domain}" | grep -A1 'ANSWER SECTION:' | tail -n 1)
+    
+    # Extract the record type and destination IP using awk
+    local record_type
+    record_type=$(echo "$result" | awk '{print $4}')
+    
+    local destination
+    destination=$(echo "$result" | awk '{print $5}')
+    
+    # Display the formatted output
+    echo "The subdomain ${subdomain} is a ${record_type} record and points to ${destination}"
+}
+
+# Main script logic
+main() {
+    local domain="$1"
+    local subdomain_arg="$2"
+
+    if [ -z "$subdomain_arg" ]; then
+        # If no specific subdomain is provided, audit the default ones
+        query_subdomain "$domain" "www"
+        query_subdomain "$domain" "lb-01"
+        query_subdomain "$domain" "web-01"
+        query_subdomain "$domain" "web-02"
+    else
+        # If a specific subdomain is provided, audit only that one
+        query_subdomain "$domain" "$subdomain_arg"
+    fi
+}
+
+# Call the main function with the script arguments
+main "$1" "$2"
